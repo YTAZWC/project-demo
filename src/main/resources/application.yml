@@ -1,0 +1,11 @@
+server:
+  port: 7979
+logging:
+  level:
+    top.ytazwc: debug
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:13306/ytazwc?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
