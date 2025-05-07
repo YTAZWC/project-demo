@@ -12,6 +12,7 @@ import java.util.List;
  * @description
  */
 public interface UserService extends IService<User> {
+
     List<User> getUser(String name);
 
 }

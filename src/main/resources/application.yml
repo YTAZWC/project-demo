@@ -47,4 +47,5 @@ spring:
 #    password: 123456
 mybatis-plus:
   type-aliases-package: top.ytazwc.entity
+  mapper-locations: classpath:mappers/*.xml
 

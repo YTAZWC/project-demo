@@ -3,28 +3,31 @@ package top.ytazwc.entity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
- * @author 00103943
- * @date 2025-04-09 17:07
+ * @author 花木凋零成兰
+ * @title Course
+ * @date 2025-05-07 22:12
  * @package top.ytazwc.entity
  * @description
  */
 @Data
-@Builder
-@TableName("user")
+@TableName("course")
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+@EqualsAndHashCode
+public class Course {
 
     @TableId
-    private Long id;
-    private String name;
-    private String password;
-    private String email;
-    private String phone;
+    private Long cid;
+
+    private String cname;
+
+    private Long userId;
+
+    private String cstatus;
 
 }
