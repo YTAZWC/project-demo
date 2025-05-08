@@ -11,4 +11,7 @@ import top.ytazwc.entity.Course;
  * @description
  */
 public interface CourseMapper extends BaseMapper<Course> {
+
+//    List<Course>
+
 }

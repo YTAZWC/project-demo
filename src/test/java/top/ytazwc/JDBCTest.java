@@ -27,7 +27,7 @@ public class JDBCTest {
 
     @Test
     public void addCourse() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             Course c = new Course();
             c.setCname("Java");
             c.setCstatus("1");

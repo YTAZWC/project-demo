@@ -6,18 +6,39 @@ logging:
 spring:
   shardingsphere:
     datasource:
-      names: db0    # 数据源名称 多数据源以,分隔
+      # 数据源名称 多数据源以,分隔
+      names: db0, db1
       db0:
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/project_demo?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+        url: jdbc:mysql://localhost:3306/project_demo1?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+        username: root
+        password: 123456
+      db1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/project_demo2?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
         username: root
         password: 123456
     # 分片规则配置
     rules:
       sharding:
+        # 分布式主键序列算法配置
+        key-generators:
+          alg_snowflake:
+            type: SNOWFLAKE
+            props:
+              worker-id: 1
         # 分片算法配置
         sharding-algorithms:
+          course_db_alg:
+            type: MOD   # 取模
+            props:
+              sharding-count: 2   # 对 2 取模
+          course_tbl_alg:
+            type: INLINE  # 行表达式算法
+            props:
+              algorithm-expression: course_$->{cid%2+1}
           table-inline:
             # 分片算法类型
             type: INLINE
@@ -25,6 +46,23 @@ spring:
               # 分片算法行表达式
               algorithm-expression: t_orders_$->{order_id%2+1}
         tables:
+          # 指定表的主键生成策略
+          course:
+            key-generate-strategy:
+              column: cid
+              key-generator-name: alg_snowflake
+            # 指定分片节点
+            actual-data-nodes: db$->{0..1}.course_$->{1..2}
+            # 分库策略
+            database-strategy:
+              standard:
+                sharding-column: cid
+                sharding-algorithm-name: course_db_alg
+            # 分表策略
+            table-strategy:
+              standard:
+                sharding-column: cid
+                sharding-algorithm-name: course_tbl_alg
           # 逻辑表名称
           t_orders:
             # 行表达式建议使用 $->{} 避免与Spring 本身的属性文件占位符冲突
