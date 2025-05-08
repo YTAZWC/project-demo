@@ -39,6 +39,8 @@ spring:
             type: INLINE  # 行表达式算法
             props:
               algorithm-expression: course_$->{cid%2+1}
+              # 允许分片算法支持范围查询
+              allow-range-query-with-inline-sharding: true
           table-inline:
             # 分片算法类型
             type: INLINE
