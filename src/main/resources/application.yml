@@ -31,6 +31,12 @@ spring:
               worker-id: 1
         # 分片算法配置
         sharding-algorithms:
+          # 自定义分片
+          course_class_tbl_alg:
+            type: CLASS_BASED
+            props:
+              strategy: COMPLEX
+              algorithmClassName: top.ytazwc.sharding.MyComplexAlgorithm
           # 复杂分片算法
           course_complex_tbl_alg:
             type: COMPLEX_INLINE
@@ -70,7 +76,7 @@ spring:
               # 复杂分片 cid, user_id 进行分片
               complex:
                 sharding-columns: cid,user_id
-                sharding-algorithm-name: course_complex_tbl_alg
+                sharding-algorithm-name: course_class_tbl_alg
 #              standard:
 #                sharding-column: cid
 #                sharding-algorithm-name: course_tbl_alg
