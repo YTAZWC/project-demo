@@ -60,6 +60,23 @@ public class ShardingTest {
         courses.forEach(System.out::println);
     }
 
+    /**
+     * 复杂分片：
+     * cid 精确查询、user_id 范围查询
+     * 此刻allow-range-query-with-inline-sharding虽然可以解决问题，但是会导致 全分片查询
+     * 需要定制复杂逻辑：使用 Class_BASED 自定义分片
+     *      1、user_id < 1000L 一定没数据，不查数据库
+     *      2、user_id 支持范围查询
+     */
+    @Test
+    public void queryCourseComplexTwo() {
+        LambdaQueryWrapper<Course> wrapper = new LambdaQueryWrapper<>();
+        wrapper.in(Course::getCid, 1127341091561930752L, 1127341092077830144L);
+        wrapper.between(Course::getUserId, 1000L, 1003L);
+        List<Course> courses = courseMapper.selectList(wrapper);
+        courses.forEach(System.out::println);
+    }
+
 
 
 }
