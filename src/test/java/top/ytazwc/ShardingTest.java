@@ -47,6 +47,19 @@ public class ShardingTest {
         courses.forEach(System.out::println);
     }
 
+    /**
+     * 使用 COMPLEX_INLINE 复杂分片策略，使用多个分片键进行组合路由
+     * cid、user_id 组合分片
+     */
+    @Test
+    public void queryCourseComplexSimple() {
+        LambdaQueryWrapper<Course> wrapper = new LambdaQueryWrapper<>();
+        wrapper.in(Course::getCid, 1127341091561930752L, 1127341092077830144L);
+        wrapper.eq(Course::getUserId, 1002L);
+        List<Course> courses = courseMapper.selectList(wrapper);
+        courses.forEach(System.out::println);
+    }
+
 
 
 }
