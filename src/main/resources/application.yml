@@ -31,6 +31,11 @@ spring:
               worker-id: 1
         # 分片算法配置
         sharding-algorithms:
+          # 复杂分片算法
+          course_complex_tbl_alg:
+            type: COMPLEX_INLINE
+            props:
+              algorithm-expression: course_$->{(cid+user_id+1)%2+1}
           course_db_alg:
             type: MOD   # 取模
             props:
@@ -62,9 +67,13 @@ spring:
                 sharding-algorithm-name: course_db_alg
             # 分表策略
             table-strategy:
-              standard:
-                sharding-column: cid
-                sharding-algorithm-name: course_tbl_alg
+              # 复杂分片 cid, user_id 进行分片
+              complex:
+                sharding-columns: cid,user_id
+                sharding-algorithm-name: course_complex_tbl_alg
+#              standard:
+#                sharding-column: cid
+#                sharding-algorithm-name: course_tbl_alg
           # 逻辑表名称
           t_orders:
             # 行表达式建议使用 $->{} 避免与Spring 本身的属性文件占位符冲突
