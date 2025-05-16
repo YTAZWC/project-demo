@@ -31,6 +31,12 @@ spring:
               worker-id: 1
         # 分片算法配置
         sharding-algorithms:
+          # 自定义行片
+          course_class_standard-tbl-alg:
+            type: CLASS_BASED
+            props:
+              strategy: STANDARD
+              algorithmClassName: top.ytazwc.sharding.MyStandardAlgorithm
           # 自定义分片
           course_class_tbl_alg:
             type: CLASS_BASED
@@ -74,12 +80,13 @@ spring:
             # 分表策略
             table-strategy:
               # 复杂分片 cid, user_id 进行分片
-              complex:
-                sharding-columns: cid,user_id
-                sharding-algorithm-name: course_class_tbl_alg
-#              standard:
-#                sharding-column: cid
-#                sharding-algorithm-name: course_tbl_alg
+#              complex:
+#                sharding-columns: cid,user_id
+#                sharding-algorithm-name: course_class_tbl_alg
+              # 自定义分片算法
+              standard:
+                sharding-column: cid
+                sharding-algorithm-name: course_class_standard-tbl-alg
           # 逻辑表名称
           t_orders:
             # 行表达式建议使用 $->{} 避免与Spring 本身的属性文件占位符冲突
