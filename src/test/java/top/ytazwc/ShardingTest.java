@@ -72,7 +72,8 @@ public class ShardingTest {
     public void queryCourseComplexTwo() {
         LambdaQueryWrapper<Course> wrapper = new LambdaQueryWrapper<>();
         wrapper.in(Course::getCid, 1127341091561930752L, 1127341092077830144L);
-        wrapper.between(Course::getUserId, 1000L, 1003L);
+        wrapper.between(Course::getUserId, 1000L, 1005L);
+//        wrapper.between(Course::getUserId, 1000L, 1003L);
         List<Course> courses = courseMapper.selectList(wrapper);
         courses.forEach(System.out::println);
     }
