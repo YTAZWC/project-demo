@@ -19,7 +19,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public List<User> getUser(String name) {
-        return this.lambdaQuery().like(User::getName, name).list();
+        return this.lambdaQuery().like(User::getUsername, name).list();
     }
 
 }
