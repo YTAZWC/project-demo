@@ -25,8 +25,6 @@ public class User {
 
     private String password;
 
-    private String passwordCipher;
-
     private String status;
 
     private int age;

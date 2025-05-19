@@ -22,15 +22,41 @@ spring:
         password: root
     # 分片规则配置
     rules:
+      # 数据加密配置
+      encrypt:
+        tables:
+          user:
+            columns:
+              password:
+                # 存储明文的字段
+                plain-column: password
+                # 存储密文的字段
+                cipher-column: password_cipher
+                encryptor-name: user_password_encrypt
+        encryptors:
+          user_password_encrypt:
+            type: SM3
+            props:
+              sm3-salt: 12345678
       sharding:
         # 分布式主键序列算法配置
         key-generators:
+          user_keygen:
+            type: NANOID
           alg_snowflake:
             type: SNOWFLAKE
             props:
               worker-id: 1
         # 分片算法配置
         sharding-algorithms:
+          user_tbl_alg:
+            type: INLINE
+            props:
+              algorithm-expression: user_$->{Math.abs(user_id.hashCode()%4).intdiv(2) + 1}
+          user_db_alg:
+            type: HASH_MOD
+            props:
+              sharding-count: 2
           # 强制分片-HINT: 用于SQL无关的方式分表, 使用Value关键字
           course_hint_tbl_alg:
             type: HINT_INLINE
@@ -70,6 +96,20 @@ spring:
               # 分片算法行表达式
               algorithm-expression: t_orders_$->{order_id%2+1}
         tables:
+          user:
+            key-generate-strategy:
+              column: user_id
+              key-generator-name: user_keygen
+            # 分片节点
+            actual-data-nodes: db$->{0..1}.user_$->{1..2}
+            database-strategy:
+              standard:
+                sharding-column: user_id
+                sharding-algorithm-name: user_db_alg
+            table-strategy:
+              standard:
+                sharding-column: user_id
+                sharding-algorithm-name: user_tbl_alg
           # 指定表的主键生成策略
           course:
             key-generate-strategy:
