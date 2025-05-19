@@ -78,6 +78,19 @@ public class ShardingTest {
         courses.forEach(System.out::println);
     }
 
+    /**
+     * 查询 cid 为奇数的课程信息
+     * 示例中的Course记录是按照cid的奇偶分片的 现在只希望查询cid为奇数的课程信息
+     * 直接通过MOD函数计算cid的奇偶， ShardingJDBC 无法识别虚拟列，因此无法进行分片计算，只能全分片路由
+     */
+    @Test
+    public void unSupportTest() {
+        // select * from course where mod(cid, 2) = 1
+        // 即当分片键上使用函数时 没办法进行识别
+        List<Course> res = courseMapper.unSupportSql();
+        res.forEach(System.out::println);
+    }
+
 
 
 }
