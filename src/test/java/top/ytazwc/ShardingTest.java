@@ -1,6 +1,7 @@
 package top.ytazwc;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import org.apache.shardingsphere.infra.hint.HintManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,6 +91,55 @@ public class ShardingTest {
         List<Course> res = courseMapper.unSupportSql();
         res.forEach(System.out::println);
     }
+
+    /**
+     * 测试强制分片
+     */
+    @Test
+    public void queryCourseByHint() {
+        // 强制只查 course_1 表
+        HintManager hintManager = HintManager.getInstance();
+        // 属性：tableSHardingValue 强制查表
+        hintManager.addTableShardingValue("course", 1);
+        List<Course> courses = courseMapper.selectList(null);
+        courses.forEach(System.out::println);
+        // 非线程安全的 用完需要关闭资源
+        hintManager.close();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
