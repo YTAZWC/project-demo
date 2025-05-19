@@ -1,17 +1,17 @@
 /*
  Navicat Premium Dump SQL
 
- Source Server         : localhost8
+ Source Server         : docker-8
  Source Server Type    : MySQL
- Source Server Version : 80036 (8.0.36)
- Source Host           : localhost:3306
+ Source Server Version : 80042 (8.0.42)
+ Source Host           : 172.30.0.1:43306
  Source Schema         : project_demo1
 
  Target Server Type    : MySQL
- Target Server Version : 80036 (8.0.36)
+ Target Server Version : 80042 (8.0.42)
  File Encoding         : 65001
 
- Date: 08/05/2025 21:56:15
+ Date: 19/05/2025 22:16:28
 */
 
 SET NAMES utf8mb4;
@@ -70,7 +70,7 @@ INSERT INTO `course_1` VALUES (1127341091524182016, 'Java', 1000, '1');
 INSERT INTO `course_1` VALUES (1127341091561930752, 'Java', 1000, '1');
 INSERT INTO `course_1` VALUES (1127341091603873792, 'Java', 1000, '1');
 INSERT INTO `course_1` VALUES (1127341091633233920, 'Java', 1000, '1');
-INSERT INTO `course_1` VALUES (1127341091675176960, 'Java', 1000, '1');
+INSERT INTO `course_1` VALUES (1127341091675176960, 'Java', 1001, '1');
 INSERT INTO `course_1` VALUES (1127341091721314304, 'Java', 1000, '1');
 INSERT INTO `course_1` VALUES (1127341091763257344, 'Java', 1000, '1');
 INSERT INTO `course_1` VALUES (1127341091796811776, 'Java', 1000, '1');
@@ -79,7 +79,7 @@ INSERT INTO `course_1` VALUES (1127341091884892160, 'Java', 1000, '1');
 INSERT INTO `course_1` VALUES (1127341091926835200, 'Java', 1000, '1');
 INSERT INTO `course_1` VALUES (1127341091972972544, 'Java', 1000, '1');
 INSERT INTO `course_1` VALUES (1127341092023304192, 'Java', 1000, '1');
-INSERT INTO `course_1` VALUES (1127341092077830144, 'Java', 1000, '1');
+INSERT INTO `course_1` VALUES (1127341092077830144, 'Java', 1001, '1');
 INSERT INTO `course_1` VALUES (1127341092111384576, 'Java', 1000, '1');
 INSERT INTO `course_1` VALUES (1127341092149133312, 'Java', 1000, '1');
 INSERT INTO `course_1` VALUES (1127341092182687744, 'Java', 1000, '1');
@@ -113,6 +113,16 @@ INSERT INTO `course_1` VALUES (1127341093168349184, 'Java', 1000, '1');
 INSERT INTO `course_1` VALUES (1127341093201903616, 'Java', 1000, '1');
 INSERT INTO `course_1` VALUES (1127341093235458048, 'Java', 1000, '1');
 INSERT INTO `course_1` VALUES (1127341093264818176, 'Java', 1000, '1');
+INSERT INTO `course_1` VALUES (1130250149671469056, 'Java', 1005, '1');
+INSERT INTO `course_1` VALUES (1130250149981847552, 'Java', 1005, '1');
+INSERT INTO `course_1` VALUES (1130250150032179200, 'Java', 1005, '1');
+INSERT INTO `course_1` VALUES (1130250150069927936, 'Java', 1005, '1');
+INSERT INTO `course_1` VALUES (1130250150107676672, 'Java', 1005, '1');
+INSERT INTO `course_1` VALUES (1130609826762588160, 'Java', 1005, '1');
+INSERT INTO `course_1` VALUES (1130609827177824256, 'Java', 1005, '1');
+INSERT INTO `course_1` VALUES (1130609827270098944, 'Java', 1005, '1');
+INSERT INTO `course_1` VALUES (1130609827362373632, 'Java', 1005, '1');
+INSERT INTO `course_1` VALUES (1130609827442065408, 'Java', 1005, '1');
 INSERT INTO `course_1` VALUES (1920460418530717698, 'Java', 1000, '1');
 INSERT INTO `course_1` VALUES (1920460418593632258, 'Java', 1000, '1');
 INSERT INTO `course_1` VALUES (1920460418656546818, 'Java', 1000, '1');
@@ -673,16 +683,79 @@ INSERT INTO `t_orders_2` VALUES (20, 1, '19', 19000.00, 1, '2025-04-15 14:48:58'
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+  `user_id` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `username` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `password` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `password_cipher` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `status` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `age` int NULL DEFAULT NULL,
+  `sex` varchar(2) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT 'F or M',
+  PRIMARY KEY (`user_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
+INSERT INTO `user` VALUES ('4QF7I8hvNp3K62SSyyqTU', 'huamulan7', 'yang', '8d9f0585acce27b0335ab74c482121dc128b591e0b3f863dc64af6818cffdf3c', 'NORMAL', 28, 'M');
+INSERT INTO `user` VALUES ('BJ8CTm4Ra5yjw5WppTJI7', 'huamulan5', 'yang', '8d9f0585acce27b0335ab74c482121dc128b591e0b3f863dc64af6818cffdf3c', 'NORMAL', 26, 'M');
+INSERT INTO `user` VALUES ('Buic3pm98_IxixkvlaVd3', 'huamulan3', 'yang', '8d9f0585acce27b0335ab74c482121dc128b591e0b3f863dc64af6818cffdf3c', 'NORMAL', 24, 'M');
+INSERT INTO `user` VALUES ('BZlCsHHhZXE5XKBySNUu3', 'huamulan2', 'yang', '8d9f0585acce27b0335ab74c482121dc128b591e0b3f863dc64af6818cffdf3c', 'NORMAL', 23, 'F');
+INSERT INTO `user` VALUES ('D9FfglqHCnK6y2RxgTUkO', 'huamulan6', 'yang', '8d9f0585acce27b0335ab74c482121dc128b591e0b3f863dc64af6818cffdf3c', 'NORMAL', 27, 'F');
+INSERT INTO `user` VALUES ('fcxM1O6dHP7jdJqR7coFi', 'huamulan0', 'yang', '8d9f0585acce27b0335ab74c482121dc128b591e0b3f863dc64af6818cffdf3c', 'NORMAL', 21, 'F');
+INSERT INTO `user` VALUES ('GI0l_Ci8_nkDjsNs2qI8d', 'huamulan9', 'yang', '8d9f0585acce27b0335ab74c482121dc128b591e0b3f863dc64af6818cffdf3c', 'NORMAL', 30, 'M');
+INSERT INTO `user` VALUES ('HEmXlk1_3zkU34vo6IJTf', 'huamulan4', 'yang', '8d9f0585acce27b0335ab74c482121dc128b591e0b3f863dc64af6818cffdf3c', 'NORMAL', 25, 'F');
+INSERT INTO `user` VALUES ('Ih2BviZX_4MNuE2Xb-lw0', 'huamulan1', 'yang', '8d9f0585acce27b0335ab74c482121dc128b591e0b3f863dc64af6818cffdf3c', 'NORMAL', 22, 'M');
+INSERT INTO `user` VALUES ('LDQZ8Y3Gxg8u0mlWsJ3vq', 'huamulan8', 'yang', '8d9f0585acce27b0335ab74c482121dc128b591e0b3f863dc64af6818cffdf3c', 'NORMAL', 29, 'F');
+
+-- ----------------------------
+-- Table structure for user_1
+-- ----------------------------
+DROP TABLE IF EXISTS `user_1`;
+CREATE TABLE `user_1`  (
+  `user_id` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `username` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `password` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `password_cipher` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `status` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `age` int NULL DEFAULT NULL,
+  `sex` varchar(2) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT 'F or M',
+  PRIMARY KEY (`user_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of user_1
+-- ----------------------------
+INSERT INTO `user_1` VALUES ('0Ccjsp2umJcNVgKQ0_K8Q', 'huamulan2', 'yang', '8d9f0585acce27b0335ab74c482121dc128b591e0b3f863dc64af6818cffdf3c', 'NORMAL', 23, 'F');
+INSERT INTO `user_1` VALUES ('10rUbEokpxw54I0Le_5Ub', 'huamulan4', 'yang', '8d9f0585acce27b0335ab74c482121dc128b591e0b3f863dc64af6818cffdf3c', 'NORMAL', 25, 'F');
+INSERT INTO `user_1` VALUES ('89UUTYu3zv8gEEGKG2zrz', 'huamulan6', 'yang', '8d9f0585acce27b0335ab74c482121dc128b591e0b3f863dc64af6818cffdf3c', 'NORMAL', 27, 'F');
+INSERT INTO `user_1` VALUES ('FOXIhAD3gglUN_8IY4sfC', 'huamulan5', '123456', '950d9aac597a86c9df5f35e5055ea5e7e92364a9983fd37a057e39a8c9894239', 'NORMAL', 26, 'M');
+INSERT INTO `user_1` VALUES ('JaTNumbq_a_JtTc4viMOo', 'huamulan8', '123456', '950d9aac597a86c9df5f35e5055ea5e7e92364a9983fd37a057e39a8c9894239', 'NORMAL', 29, 'F');
+INSERT INTO `user_1` VALUES ('MTCrMAAz73W7ds6lJGixL', 'huamulan4', '123456', '950d9aac597a86c9df5f35e5055ea5e7e92364a9983fd37a057e39a8c9894239', 'NORMAL', 25, 'F');
+INSERT INTO `user_1` VALUES ('Vh6uT-NAO4yEY--KnT8TB', 'huamulan5', 'yang', '8d9f0585acce27b0335ab74c482121dc128b591e0b3f863dc64af6818cffdf3c', 'NORMAL', 26, 'M');
+
+-- ----------------------------
+-- Table structure for user_2
+-- ----------------------------
+DROP TABLE IF EXISTS `user_2`;
+CREATE TABLE `user_2`  (
+  `user_id` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `username` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `password` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `password_cipher` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `status` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `age` int NULL DEFAULT NULL,
+  `sex` varchar(2) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT 'F or M',
+  PRIMARY KEY (`user_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of user_2
+-- ----------------------------
+INSERT INTO `user_2` VALUES ('Aj0zwx0PS4CCh4gWJB1RL', 'huamulan7', '123456', '950d9aac597a86c9df5f35e5055ea5e7e92364a9983fd37a057e39a8c9894239', 'NORMAL', 28, 'M');
+INSERT INTO `user_2` VALUES ('aZ_AJ0idzZrOY0lbRPJ3O', 'huamulan3', '123456', '950d9aac597a86c9df5f35e5055ea5e7e92364a9983fd37a057e39a8c9894239', 'NORMAL', 24, 'M');
+INSERT INTO `user_2` VALUES ('dL6I5Yr1t4spAjdWaIDf_', 'huamulan2', '123456', '950d9aac597a86c9df5f35e5055ea5e7e92364a9983fd37a057e39a8c9894239', 'NORMAL', 23, 'F');
+INSERT INTO `user_2` VALUES ('EyYdWcHPl4ji05Vvit4Ai', 'huamulan8', 'yang', '8d9f0585acce27b0335ab74c482121dc128b591e0b3f863dc64af6818cffdf3c', 'NORMAL', 29, 'F');
+INSERT INTO `user_2` VALUES ('NZrPVbkFo6a85STvP1MUb', 'huamulan0', '123456', '950d9aac597a86c9df5f35e5055ea5e7e92364a9983fd37a057e39a8c9894239', 'NORMAL', 21, 'F');
+INSERT INTO `user_2` VALUES ('yDH73hiHg670UPtyCtS3q', 'huamulan1', 'yang', '8d9f0585acce27b0335ab74c482121dc128b591e0b3f863dc64af6818cffdf3c', 'NORMAL', 22, 'M');
 
 SET FOREIGN_KEY_CHECKS = 1;
