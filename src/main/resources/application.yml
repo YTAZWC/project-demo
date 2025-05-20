@@ -121,20 +121,20 @@ spring:
           user:
             # 配置读写分离
             # 配置读写分离的虚拟库
-            actual-data-nodes: user_db.user
+#            actual-data-nodes: user_db.user
             key-generate-strategy:
               column: user_id
               key-generator-name: user_keygen
 #            # 分片节点
-#            actual-data-nodes: db$->{0..1}.user_$->{1..2}
-#            database-strategy:
-#              standard:
-#                sharding-column: user_id
-#                sharding-algorithm-name: user_db_alg
-#            table-strategy:
-#              standard:
-#                sharding-column: user_id
-#                sharding-algorithm-name: user_tbl_alg
+            actual-data-nodes: db$->{0..1}.user_$->{1..2}
+            database-strategy:
+              standard:
+                sharding-column: user_id
+                sharding-algorithm-name: user_db_alg
+            table-strategy:
+              standard:
+                sharding-column: user_id
+                sharding-algorithm-name: user_tbl_alg
           # 指定表的主键生成策略
           course:
             key-generate-strategy:
