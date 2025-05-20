@@ -154,6 +154,7 @@ spring:
           course:
             # 审计功能: 执行SQL前必须包含分片键
             audit-strategy:
+              # 是否允许分片类型为HINT时 不带分片键也可执行; true-不允许
               allow-hint-disable: true
               auditor-names:
                 - course_auditor

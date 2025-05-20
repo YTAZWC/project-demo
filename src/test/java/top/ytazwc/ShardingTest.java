@@ -83,6 +83,8 @@ public class ShardingTest {
      * 查询 cid 为奇数的课程信息
      * 示例中的Course记录是按照cid的奇偶分片的 现在只希望查询cid为奇数的课程信息
      * 直接通过MOD函数计算cid的奇偶， ShardingJDBC 无法识别虚拟列，因此无法进行分片计算，只能全分片路由
+     * <br>
+     * <p style="color:red">可测试SQL审计功能</p>
      */
     @Test
     public void unSupportTest() {
