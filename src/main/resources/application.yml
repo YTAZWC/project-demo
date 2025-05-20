@@ -152,6 +152,11 @@ spring:
                 sharding-algorithm-name: user_tbl_alg
           # 指定表的主键生成策略
           course:
+            # 审计功能: 执行SQL前必须包含分片键
+            audit-strategy:
+              allow-hint-disable: true
+              auditor-names:
+                - course_auditor
             key-generate-strategy:
               column: cid
               key-generator-name: alg_snowflake
@@ -191,6 +196,11 @@ spring:
         # 绑定表关系
         binding-tables:
           - user,user_course_info
+        # 配置审计算法
+        auditors:
+          course_auditor:
+            type: DML_SHARDING_CONDITIONS
+
     props:
       # 展示修改以后的SQL语句
       sql-show: true
