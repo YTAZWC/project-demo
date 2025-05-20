@@ -56,6 +56,8 @@ spring:
       sharding:
         # 分布式主键序列算法配置
         key-generators:
+          dict_keygen:
+            type: SNOWFLAKE
           user_keygen:
             type: NANOID
           alg_snowflake:
@@ -111,6 +113,11 @@ spring:
               # 分片算法行表达式
               algorithm-expression: t_orders_$->{order_id%2+1}
         tables:
+          dict:
+            key-generate-strategy:
+              column: dict_id
+              key-generator-name: dict_keygen
+            actual-data-nodes: db$->{0..1}.dict
           user:
             # 配置读写分离
             # 配置读写分离的虚拟库
@@ -164,6 +171,8 @@ spring:
                 sharding-column: order_id
                 # 分片算法名称
                 sharding-algorithm-name: table-inline
+        # 指定广播表 会忽略分表逻辑,只往多个库的同一个表插入数据
+        broadcast-tables: dict
     props:
       # 展示修改以后的SQL语句
       sql-show: true
